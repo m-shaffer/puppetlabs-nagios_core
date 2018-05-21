@@ -11,7 +11,8 @@ describe 'Nagios file creation' do
   before :each do
     FileUtils.touch(target_file)
     Puppet::FileSystem.chmod(initial_mode, target_file)
-    Puppet::FileBucket::Dipper.any_instance.stubs(:backup) # Don't backup to filebucket
+    # Don't backup to filebucket.
+    Puppet::FileBucket::Dipper.any_instance.stubs(:backup) # rubocop:disable RSpec/AnyInstance
   end
 
   let :target_file do

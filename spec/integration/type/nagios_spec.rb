@@ -7,16 +7,13 @@ describe 'Nagios file creation' do
   include PuppetSpec::Files
 
   let(:initial_mode) { 0o600 }
+  let(:target_file) { tmpfile('nagios_integration_specs') }
 
   before :each do
     FileUtils.touch(target_file)
     Puppet::FileSystem.chmod(initial_mode, target_file)
     # Don't backup to filebucket.
     Puppet::FileBucket::Dipper.any_instance.stubs(:backup) # rubocop:disable RSpec/AnyInstance
-  end
-
-  let :target_file do
-    tmpfile('nagios_integration_specs')
   end
 
   # Copied from the crontab integration spec.

@@ -195,7 +195,7 @@ EOL
       nagios_type.command_line = results[0].command_line
       expect(nagios_type.to_s).to eql(ANOTHER_ESCAPED_SEMICOLON)
     end
-  
+
     context 'when reading UTF8 values' do
       it 'is converted to ASCII_8BIT for ruby 1.9 / 2.0', if: RUBY_VERSION < '2.1.0' && String.method_defined?(:encode) do
         parser = Nagios::Parser.new

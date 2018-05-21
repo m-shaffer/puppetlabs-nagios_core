@@ -197,7 +197,7 @@ class Nagios::Base
   end
 
   # Handle parameters like attributes.
-  def method_missing(mname, *args)
+  def method_missing(mname, *args) # rubocop:disable Style/MethodMissing
     pname = mname.to_s
     pname.sub!(%r{=}, '')
 

@@ -7,6 +7,7 @@ require 'digest/md5'
 require 'puppet/external/nagios/parser.rb'
 require 'puppet/external/nagios/base.rb'
 
+# Top-level namespace for Nagios related things.
 module Nagios
   NAGIOSVERSION = '1.1'.freeze
   # yay colors
@@ -23,6 +24,7 @@ module Nagios
     NAGIOSVERSION
   end
 
+  # Interface for reading in a Nagios config file.
   class Config
     def self.import(config)
       text = ''

@@ -2,6 +2,7 @@ require 'puppet/external/nagios'
 require 'puppet/external/nagios/base'
 require 'puppet/provider/naginator'
 
+# Generator for creating the Nagios types
 module Puppet::Util::NagiosMaker
   # Create a new nagios type, using all of the parameters
   # from the parser.

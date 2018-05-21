@@ -16,7 +16,7 @@ module Puppet::Util::NagiosMaker
       # Generate a file resource if necessary.
       #
       # @see Puppet::Type::File and its properties owner, group and mode.
-      def generate
+      def generate # rubocop:disable Lint/NestedMethodDefinition
         return nil unless self[:owner] || self[:group] || self[:mode]
         props = { name: self[:target] }
         [:owner, :group, :mode].each do |prop|

@@ -5,8 +5,8 @@
 #
 
 require 'racc/parser.rb'
-module Nagios
-  class Parser < Racc::Parser
+module Nagios # rubocop:disable Style/ClassAndModuleChildren
+  class Parser < Racc::Parser # rubocop:disable Style/Documentation
     module_eval(<<'...end grammar.ry/module_eval...', 'grammar.ry', 50)
 require 'strscan'
 
@@ -321,7 +321,7 @@ end
       'var',
     ].freeze
 
-    Racc_debug_parser = false
+    Racc_debug_parser = false # rubocop:disable Style/ConstantName
 
     ##### State transition tables end #####
 

@@ -146,7 +146,7 @@ EOL
       it 'parses correctly if it is escaped' do
         parser =  Nagios::Parser.new
         results = parser.parse(ESCAPED_SEMICOLON)
-        expect(results[0].command_line).to eql('$USER3$/check_mysql_health --hostname localhost --username nagioschecks --password nagiosCheckPWD --mode sql --name "SELECT ROUND(Data_length/1024) as Data_kBytes from INFORMATION_SCHEMA.TABLES where TABLE_NAME=\\"$ARG1$\\";" --name2 "table size" --units kBytes -w $ARG2$ -c $ARG3$')
+        expect(results[0].command_line).to eql('$USER3$/check_mysql_health --hostname localhost --username nagioschecks --password nagiosCheckPWD --mode sql --name "SELECT ROUND(Data_length/1024) as Data_kBytes from INFORMATION_SCHEMA.TABLES where TABLE_NAME=\\"$ARG1$\\";" --name2 "table size" --units kBytes -w $ARG2$ -c $ARG3$') # rubocop:disable Metrics/LineLength
       end
     end
 
@@ -167,7 +167,7 @@ EOL
       it 'lets it go anywhere else' do
         parser =  Nagios::Parser.new
         results = parser.parse(POUND_SIGN_HASH_SYMBOL_NOT_IN_FIRST_COLUMN)
-        expect(results[0].command_line).to eql("/usr/local/bin/riseup-nagios-client.pl \"$HOSTNAME$ ($SERVICEDESC$) $NOTIFICATIONTYPE$ \#$SERVICEATTEMPT$ $SERVICESTATETYPE$ $SERVICEEXECUTIONTIME$s $SERVICELATENCY$s $SERVICEOUTPUT$ $SERVICEPERFDATA$\"")
+        expect(results[0].command_line).to eql("/usr/local/bin/riseup-nagios-client.pl \"$HOSTNAME$ ($SERVICEDESC$) $NOTIFICATIONTYPE$ \#$SERVICEATTEMPT$ $SERVICESTATETYPE$ $SERVICEEXECUTIONTIME$s $SERVICELATENCY$s $SERVICEOUTPUT$ $SERVICEPERFDATA$\"") # rubocop:disable Metrics/LineLength
       end
     end
 
@@ -214,21 +214,21 @@ EOL
 
   context 'generator' do
     it "escapes ';'" do
-      param = '$USER3$/check_mysql_health --hostname localhost --username nagioschecks --password nagiosCheckPWD --mode sql --name "SELECT ROUND(Data_length/1024) as Data_kBytes from INFORMATION_SCHEMA.TABLES where TABLE_NAME=\"$ARG1$\";" --name2 "table size" --units kBytes -w $ARG2$ -c $ARG3$'
+      param = '$USER3$/check_mysql_health --hostname localhost --username nagioschecks --password nagiosCheckPWD --mode sql --name "SELECT ROUND(Data_length/1024) as Data_kBytes from INFORMATION_SCHEMA.TABLES where TABLE_NAME=\"$ARG1$\";" --name2 "table size" --units kBytes -w $ARG2$ -c $ARG3$' # rubocop:disable Metrics/LineLength
       nagios_type = Nagios::Base.create(:command)
       nagios_type.command_line = param
-      expect(nagios_type.to_s).to eql("define command {\n\tcommand_line                   $USER3$/check_mysql_health --hostname localhost --username nagioschecks --password nagiosCheckPWD --mode sql --name \"SELECT ROUND(Data_length/1024) as Data_kBytes from INFORMATION_SCHEMA.TABLES where TABLE_NAME=\\\"$ARG1$\\\"\\;\" --name2 \"table size\" --units kBytes -w $ARG2$ -c $ARG3$\n}\n")
+      expect(nagios_type.to_s).to eql("define command {\n\tcommand_line                   $USER3$/check_mysql_health --hostname localhost --username nagioschecks --password nagiosCheckPWD --mode sql --name \"SELECT ROUND(Data_length/1024) as Data_kBytes from INFORMATION_SCHEMA.TABLES where TABLE_NAME=\\\"$ARG1$\\\"\\;\" --name2 \"table size\" --units kBytes -w $ARG2$ -c $ARG3$\n}\n") # rubocop:disable Metrics/LineLength
     end
 
     it "escapes ';' if it is not already the case" do
       param = "LC_ALL=en_US.UTF-8 /usr/lib/nagios/plugins/check_haproxy -u 'http://blah:blah@$HOSTADDRESS$:8080/haproxy?stats;csv'"
       nagios_type = Nagios::Base.create(:command)
       nagios_type.command_line = param
-      expect(nagios_type.to_s).to eql("define command {\n\tcommand_line                   LC_ALL=en_US.UTF-8 /usr/lib/nagios/plugins/check_haproxy -u 'http://blah:blah@$HOSTADDRESS$:8080/haproxy?stats\\;csv'\n}\n")
+      expect(nagios_type.to_s).to eql("define command {\n\tcommand_line                   LC_ALL=en_US.UTF-8 /usr/lib/nagios/plugins/check_haproxy -u 'http://blah:blah@$HOSTADDRESS$:8080/haproxy?stats\\;csv'\n}\n") # rubocop:disable Metrics/LineLength
     end
 
     it 'is idempotent' do
-      param = '$USER3$/check_mysql_health --hostname localhost --username nagioschecks --password nagiosCheckPWD --mode sql --name "SELECT ROUND(Data_length/1024) as Data_kBytes from INFORMATION_SCHEMA.TABLES where TABLE_NAME=\"$ARG1$\";" --name2 "table size" --units kBytes -w $ARG2$ -c $ARG3$'
+      param = '$USER3$/check_mysql_health --hostname localhost --username nagioschecks --password nagiosCheckPWD --mode sql --name "SELECT ROUND(Data_length/1024) as Data_kBytes from INFORMATION_SCHEMA.TABLES where TABLE_NAME=\"$ARG1$\";" --name2 "table size" --units kBytes -w $ARG2$ -c $ARG3$' # rubocop:disable Metrics/LineLength
       nagios_type = Nagios::Base.create(:command)
       nagios_type.command_line = param
       parser =  Nagios::Parser.new

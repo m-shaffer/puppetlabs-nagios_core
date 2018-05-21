@@ -12,6 +12,8 @@ AllCops:
   - pkg/**/*
   - spec/fixtures/**/*
   - vendor/**/*
+Layout/IndentHeredoc:
+  Enabled: false
 Metrics/LineLength:
   Description: People have wide screens, use them.
   Max: 200

@@ -4,11 +4,11 @@ require 'spec_helper'
 require 'puppet/provider/naginator'
 
 describe Puppet::Provider::Naginator do
-  before(:each) do
-    @resource_type = stub 'resource_type', name: :nagios_test
-    @class = Class.new(described_class)
+  let(:resource_type) { stub('resource_type', name: :nagios_test) }
+  let(:klass) { Class.new(described_class) }
 
-    @class.stubs(:resource_type).returns @resource_type
+  before(:each) do
+    klass.stubs(:resource_type).returns(resource_type)
   end
 
   it 'is able to look up the associated Nagios type' do
@@ -16,7 +16,7 @@ describe Puppet::Provider::Naginator do
     nagios_type.stubs :attr_accessor
     Nagios::Base.expects(:type).with(:test).returns nagios_type
 
-    expect(@class.nagios_type).to equal(nagios_type)
+    expect(klass.nagios_type).to equal(nagios_type)
   end
 
   it 'uses the Nagios type to determine whether an attribute is valid' do
@@ -26,7 +26,7 @@ describe Puppet::Provider::Naginator do
 
     nagios_type.expects(:parameters).returns [:foo, :bar]
 
-    expect(@class).to be_valid_attr(:test, :foo)
+    expect(klass).to be_valid_attr(:test, :foo)
   end
 
   it 'uses Naginator to parse configuration snippets' do
@@ -34,24 +34,24 @@ describe Puppet::Provider::Naginator do
     parser.expects(:parse).with('my text').returns 'my instances'
     Nagios::Parser.expects(:new).returns(parser)
 
-    expect(@class.parse('my text')).to eq('my instances')
+    expect(klass.parse('my text')).to eq('my instances')
   end
 
   it "joins Nagios::Base records with '\\n' when asked to convert them to text" do
-    @class.expects(:header).returns "myheader\n"
+    klass.expects(:header).returns "myheader\n"
 
-    expect(@class.to_file([:one, :two])).to eq("myheader\none\ntwo")
+    expect(klass.to_file([:one, :two])).to eq("myheader\none\ntwo")
   end
 
   it 'is able to prefetch instance from configuration files' do
-    expect(@class).to respond_to(:prefetch)
+    expect(klass).to respond_to(:prefetch)
   end
 
   it 'is able to generate a list of instances' do
-    expect(@class).to respond_to(:instances)
+    expect(klass).to respond_to(:instances)
   end
 
   it 'nevers skip records' do
-    expect(@class).not_to be_skip_record('foo')
+    expect(klass).not_to be_skip_record('foo')
   end
 end

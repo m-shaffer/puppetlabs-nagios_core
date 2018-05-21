@@ -3,7 +3,7 @@ require 'spec_helper'
 
 require 'puppet/provider/naginator'
 
-describe Puppet::Provider::Naginator do
+describe Puppet::Provider::Naginator do # rubocop:disable RSpec/FilePath
   let(:resource_type) { stub('resource_type', name: :nagios_test) }
   let(:klass) { Class.new(described_class) }
 

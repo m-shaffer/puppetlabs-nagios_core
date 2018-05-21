@@ -3,7 +3,7 @@ require 'spec_helper'
 
 require 'puppet/util/nagios_maker'
 
-describe Puppet::Util::NagiosMaker do
+describe Puppet::Util::NagiosMaker do # rubocop:disable RSpec/FilePath
   context 'when creating other types' do
     let(:nagtype)  { stub('nagios type', parameters: [], namevar: :name) }
     let(:provider) { stub('provider', nagios_type: nil) }

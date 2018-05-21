@@ -41,11 +41,9 @@ class Nagios::Base
   def self.create(name, args = {})
     name = name.to_sym if name.is_a? String
 
-    if @types.include?(name)
-      @types[name].new(args)
-    else
-      raise UnknownNagiosType, "Unknown type #{name}"
-    end
+    raise UnknownNagiosType, "Unknown type #{name}" unless @types.include?(name)
+
+    @types[name].new(args)
   end
 
   # Yield each type in turn.
@@ -196,9 +194,8 @@ class Nagios::Base
     args.each do |param, value|
       self[param] = value
     end
-    if @namevar == :_naginator_name
-      self['_naginator_name'] = self['name']
-    end
+
+    self['_naginator_name'] = self['name'] if @namevar == :_naginator_name
   end
 
   # Handle parameters like attributes.
@@ -217,7 +214,7 @@ class Nagios::Base
       if mname.to_s =~ %r{=$}
         @parameters[pname] = args.first
       else
-        return @parameters[mname]
+        @parameters[mname]
       end
     else
       super
@@ -231,9 +228,7 @@ class Nagios::Base
 
   # This is probably a bad idea.
   def name=(value)
-    unless self.class.namevar.to_s == 'name'
-      send(self.class.namevar.to_s + '=', value)
-    end
+    send(self.class.namevar.to_s + '=', value) unless self.class.namevar.to_s == 'name'
   end
 
   def namevar
@@ -248,9 +243,9 @@ class Nagios::Base
       map.update(self.class.map) if self.class.map
     end
     if map.include?(param)
-      return map[param]
+      map[param]
     else
-      return 'nagios-' + param.id2name.tr('_', '-')
+      'nagios-' + param.id2name.tr('_', '-')
     end
   end
 

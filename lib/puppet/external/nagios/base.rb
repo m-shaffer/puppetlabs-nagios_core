@@ -1,3 +1,5 @@
+require 'puppet/external/nagios'
+
 # The base class for all of our Nagios object types.  Everything else
 # is mostly just data.
 class Nagios::Base

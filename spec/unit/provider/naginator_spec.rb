@@ -55,25 +55,3 @@ describe Puppet::Provider::Naginator do
     expect(@class).not_to be_skip_record('foo')
   end
 end
-
-describe Nagios::Base do
-  it 'does not turn set parameters into arrays #17871' do
-    obj = described_class.create('host')
-    obj.host_name = 'my_hostname'
-    expect(obj.host_name).to eq('my_hostname')
-  end
-end
-
-describe Nagios::Parser do
-  include PuppetSpec::Files
-
-  subject do
-    described_class.new
-  end
-
-  let(:config) { File.new(my_fixture('define_empty_param')).read }
-
-  it 'handles empty parameter values' do
-    expect { subject.parse(config) }.not_to raise_error
-  end
-end

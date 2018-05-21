@@ -73,15 +73,13 @@ class Nagios::Base
   def self.namevar
     if defined?(@namevar)
       @namevar
+    elsif parameter?(:name)
+      :name
+    elsif (tmp = (name.to_s + '_name').to_sym) && parameter?(tmp)
+      @namevar = tmp
+      @namevar
     else
-      if parameter?(:name)
-        :name
-      elsif (tmp = (name.to_s + '_name').to_sym) && parameter?(tmp)
-        @namevar = tmp
-        @namevar
-      else
-        raise "Type #{name} has no name var"
-      end
+      raise "Type #{name} has no name var"
     end
   end
 

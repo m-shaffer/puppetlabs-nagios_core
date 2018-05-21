@@ -3,44 +3,43 @@
 # cfservd file from them
 
 require 'digest/md5'
-#require 'ldap'
+# require 'ldap'
 require 'puppet/external/nagios/parser.rb'
 require 'puppet/external/nagios/base.rb'
 
 module Nagios
-  NAGIOSVERSION = '1.1'
+  NAGIOSVERSION = '1.1'.freeze
   # yay colors
-  PINK = "[0;31m"
-  GREEN = "[0;32m"
-  YELLOW = "[0;33m"
-  SLATE = "[0;34m"
-  ORANGE = "[0;35m"
-  BLUE = "[0;36m"
-  NOCOLOR = "[0m"
-  RESET = "[0m"
+  PINK = "\e[0;31m".freeze
+  GREEN = "\e[0;32m".freeze
+  YELLOW = "\e[0;33m".freeze
+  SLATE = "\e[0;34m".freeze
+  ORANGE = "\e[0;35m".freeze
+  BLUE = "\e[0;36m".freeze
+  NOCOLOR = "\e[0m".freeze
+  RESET = "\e[0m".freeze
 
   def self.version
     NAGIOSVERSION
   end
 
   class Config
-    def Config.import(config)
+    def self.import(config)
+      text = ''
 
-      text = String.new
-
-      File.open(config) { |file|
-        file.each { |line|
+      File.open(config) do |file|
+        file.each do |line|
           text += line
-        }
-      }
+        end
+      end
       parser = Nagios::Parser.new
       parser.parse(text)
     end
 
-    def Config.each
-      Nagios::Object.objects.each { |object|
+    def self.each
+      Nagios::Object.objects.each do |object|
         yield object
-      }
+      end
     end
   end
 end

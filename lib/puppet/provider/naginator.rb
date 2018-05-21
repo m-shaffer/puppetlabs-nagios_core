@@ -4,11 +4,11 @@ require 'puppet/external/nagios'
 
 # The base class for all Naginator providers.
 class Puppet::Provider::Naginator < Puppet::Provider::ParsedFile
-  NAME_STRING = "## --PUPPET_NAME-- (called '_naginator_name' in the manifest)"
+  NAME_STRING = "## --PUPPET_NAME-- (called '_naginator_name' in the manifest)".freeze
   # Retrieve the associated class from Nagios::Base.
   def self.nagios_type
     unless @nagios_type
-      name = resource_type.name.to_s.sub(/^nagios_/, '')
+      name = resource_type.name.to_s.sub(%r{^nagios_}, '')
       unless @nagios_type = Nagios::Base.type(name.to_sym)
         raise Puppet::DevError, _("Could not find nagios type '%{name}'") % { name: name }
       end
@@ -21,28 +21,28 @@ class Puppet::Provider::Naginator < Puppet::Provider::ParsedFile
   end
 
   def self.parse(text)
-      Nagios::Parser.new.parse(text.gsub(NAME_STRING, "_naginator_name"))
+    Nagios::Parser.new.parse(text.gsub(NAME_STRING, '_naginator_name'))
   rescue => detail
-      raise Puppet::Error, _("Could not parse configuration for %{resource}: %{detail}") % { resource: resource_type.name, detail: detail }, detail.backtrace
+    raise Puppet::Error, _('Could not parse configuration for %{resource}: %{detail}') % { resource: resource_type.name, detail: detail }, detail.backtrace
   end
 
   def self.to_file(records)
-    header + records.collect { |record|
-        # Remap the TYPE_name or _naginator_name params to the
-        # name if the record is a template (register == 0)
-        if record.to_s =~ /register\s+0/
-            record.to_s.sub("_naginator_name", "name").sub(record.type.to_s + "_name", "name")
-        else
-            record.to_s.sub("_naginator_name", NAME_STRING)
-        end
+    header + records.map { |record|
+      # Remap the TYPE_name or _naginator_name params to the
+      # name if the record is a template (register == 0)
+      if record.to_s =~ %r{register\s+0}
+        record.to_s.sub('_naginator_name', 'name').sub(record.type.to_s + '_name', 'name')
+      else
+        record.to_s.sub('_naginator_name', NAME_STRING)
+      end
     }.join("\n")
   end
 
-  def self.skip_record?(record)
+  def self.skip_record?(_record)
     false
   end
 
-  def self.valid_attr?(klass, attr_name)
+  def self.valid_attr?(_klass, attr_name)
     nagios_type.parameters.include?(attr_name)
   end
 

@@ -3,10 +3,10 @@
 require 'spec_helper'
 require 'puppet/file_bucket/dipper'
 
-describe "Nagios file creation" do
+describe 'Nagios file creation' do
   include PuppetSpec::Files
 
-  let(:initial_mode) { 0600 }
+  let(:initial_mode) { 0o600 }
 
   before :each do
     FileUtils.touch(target_file)
@@ -35,33 +35,33 @@ describe "Nagios file creation" do
     catalog.apply
   end
 
-  context "when creating a nagios config file" do
-    context "which is not managed" do
-      it "should choose the file mode if requested" do
+  context 'when creating a nagios config file' do
+    context 'which is not managed' do
+      it 'chooses the file mode if requested' do
         resource = Puppet::Type.type(:nagios_host).new(
-          :name   => 'spechost',
-          :use    => 'spectemplate',
-          :ensure => 'present',
-          :target => target_file,
-          :mode   => '0640'
+          name: 'spechost',
+          use: 'spectemplate',
+          ensure: 'present',
+          target: target_file,
+          mode: '0640',
         )
         run_in_catalog(resource)
-        expect_file_mode(target_file, "640")
+        expect_file_mode(target_file, '640')
       end
     end
 
-    context "which is managed" do
-      it "should not override the mode" do
+    context 'which is managed' do
+      it 'does not override the mode' do
         file_res = Puppet::Type.type(:file).new(
-          :name   => target_file,
-          :ensure => :present
+          name: target_file,
+          ensure: :present,
         )
         nag_res = Puppet::Type.type(:nagios_host).new(
-          :name   => 'spechost',
-          :use    => 'spectemplate',
-          :ensure => :present,
-          :target => target_file,
-          :mode   => '0640'
+          name: 'spechost',
+          use: 'spectemplate',
+          ensure: :present,
+          target: target_file,
+          mode: '0640',
         )
         run_in_catalog(file_res, nag_res)
         expect_file_mode(target_file, initial_mode.to_s(8))

@@ -8,7 +8,7 @@ module PuppetSpec::Files
   @global_tempfiles = []
 
   def self.cleanup
-    while !@global_tempfiles.empty?
+    until @global_tempfiles.empty?
       path = @global_tempfiles.pop
       begin
         Dir.unstub(:entries)

@@ -34,7 +34,6 @@ group :development do
   gem "puppet-module-win-default-r#{minor_version}",   require: false, platforms: [:mswin, :mingw, :x64_mingw]
   gem "puppet-module-win-dev-r#{minor_version}",       require: false, platforms: [:mswin, :mingw, :x64_mingw]
   gem "puppet-blacksmith", '~> 3.4',                   require: false, platforms: [:ruby]
-  gem "puppet-blacksmith", '~> 3.4',                   require: false
   gem "puppet-strings",                                require: false
 end
 group :system_tests do

@@ -33,3 +33,6 @@ Rakefile:
       Enabled: false
     RSpec/NamedSubject:
       Enabled: false
+
+.gitlab-ci.yml:
+  delete: true

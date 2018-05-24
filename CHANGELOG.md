@@ -8,4 +8,4 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Summary
 This is the initial release of the extracted nagios_core module
 
-[1.0.0]: https://github.com/puppetlabs/puppetlabs-mailalias_core/releases/tag/1.0.0 Changelog
+[1.0.0]: https://github.com/puppetlabs/puppetlabs-mailalias_core/releases/tag/1.0.0

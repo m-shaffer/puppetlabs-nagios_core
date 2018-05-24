@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+require 'puppet/external/nagios/base'
 require 'puppet/external/nagios/parser'
 
 describe Nagios::Parser do

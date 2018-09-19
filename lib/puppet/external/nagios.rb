@@ -4,8 +4,8 @@
 
 require 'digest/md5'
 # require 'ldap'
-require 'puppet/external/nagios/parser.rb'
-require 'puppet/external/nagios/base.rb'
+require File.dirname(__FILE__) + '/../external/nagios/parser.rb'
+require File.dirname(__FILE__) + '/../external/nagios/base.rb'
 
 # Top-level namespace for Nagios related things.
 module Nagios

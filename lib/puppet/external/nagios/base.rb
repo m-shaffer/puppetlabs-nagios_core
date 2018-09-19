@@ -1,4 +1,4 @@
-require 'puppet/external/nagios'
+require File.dirname(__FILE__) + '/../nagios'
 
 # The base class for all of our Nagios object types.  Everything else
 # is mostly just data.

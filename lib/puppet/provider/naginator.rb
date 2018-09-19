@@ -1,6 +1,6 @@
 require 'puppet'
 require 'puppet/provider/parsedfile'
-require 'puppet/external/nagios'
+require File.dirname(__FILE__) + '/../external/nagios'
 
 # The base class for all Naginator providers.
 class Puppet::Provider::Naginator < Puppet::Provider::ParsedFile

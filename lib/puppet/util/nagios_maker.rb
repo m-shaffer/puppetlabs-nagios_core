@@ -1,6 +1,6 @@
-require 'puppet/external/nagios'
-require 'puppet/external/nagios/base'
-require 'puppet/provider/naginator'
+require File.dirname(__FILE__) + '/../external/nagios'
+require File.dirname(__FILE__) + '/../external/nagios/base'
+require File.dirname(__FILE__) + '/../provider/naginator'
 
 # Generator for creating the Nagios types
 module Puppet::Util::NagiosMaker

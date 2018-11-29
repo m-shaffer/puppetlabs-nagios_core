@@ -6,14 +6,17 @@
 2. [Limitations - OS compatibility, etc.](#limitations)
 3. [Development - Guide for contributing to the module](#development)
 
+<a id="description"></a>
 ## Description
 
 The nagios module is used to manage Nagios's various configuration files.
 
+<a id="limitations"></a>
 ## Limitations
 
 All `nagios_*` types default to having a `target` under `/etc/nagios/`, but should work on any system as long as an appropriate `target` is set for that system.
 
+<a id="development"></a>
 ## Development
 
 Puppet Labs modules on the Puppet Forge are open projects, and community contributions are essential for keeping them great. We can't access the huge number of platforms and myriad of hardware, software, and deployment configurations that Puppet is intended to serve.

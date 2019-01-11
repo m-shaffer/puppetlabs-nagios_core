@@ -1,6 +1,6 @@
 {
   "name": "puppetlabs-nagios_core",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Puppet Labs",
   "summary": "Manage Nagios resource configuration files.",
   "license": "Apache-2.0",

@@ -206,6 +206,11 @@ Nagios configuration file parameter.
 
 Nagios configuration file parameter.
 
+##### `minimum_importance`
+
+(*Property:* This attribute represents concrete state on the target system.)
+
+Nagios configuration file parameter.
 ##### `mode`
 
 The desired mode of the config file for this `nagios_contact` resource.
@@ -527,6 +532,12 @@ Nagios configuration file parameter.
 Nagios configuration file parameter.
 
 ##### `icon_image_alt`
+
+(*Property:* This attribute represents concrete state on the target system.)
+
+Nagios configuration file parameter.
+
+##### `importance`
 
 (*Property:* This attribute represents concrete state on the target system.)
 
@@ -1290,6 +1301,12 @@ Nagios configuration file parameter.
 
 Nagios configuration file parameter.
 
+##### `importance`
+
+(*Property:* This attribute represents concrete state on the target system.)
+
+Nagios configuration file parameter.
+
 ##### `initial_state`
 
 (*Property:* This attribute represents concrete state on the target system.)
@@ -1375,6 +1392,12 @@ The desired owner of the config file for this `nagios_service` resource.
 NOTE: If the target file is explicitly managed by a file resource in your manifest, this parameter has no effect. If a parent directory of the target is managed by a recursive file resource, this limitation does not apply (i.e., this parameter takes precedence, and if purge is used, the target file is exempt).
 
 ##### `parallelize_check`
+
+(*Property:* This attribute represents concrete state on the target system.)
+
+Nagios configuration file parameter.
+
+##### `parents`
 
 (*Property:* This attribute represents concrete state on the target system.)
 

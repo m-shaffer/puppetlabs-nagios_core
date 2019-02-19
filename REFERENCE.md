@@ -211,6 +211,7 @@ Nagios configuration file parameter.
 (*Property:* This attribute represents concrete state on the target system.)
 
 Nagios configuration file parameter.
+
 ##### `mode`
 
 The desired mode of the config file for this `nagios_contact` resource.

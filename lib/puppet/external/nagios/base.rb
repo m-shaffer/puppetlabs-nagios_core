@@ -312,7 +312,7 @@ class Nagios::Base
 
   # object types
   newtype :host do
-    setparameters :host_name, :alias, :display_name, :address, :parents,
+    setparameters :host_name, :alias, :display_name, :address, :parents, :importance,
                   :hostgroups, :check_command, :initial_state, :max_check_attempts,
                   :check_interval, :retry_interval, :active_checks_enabled,
                   :passive_checks_enabled, :check_period, :obsess_over_host,
@@ -343,11 +343,11 @@ class Nagios::Base
   newtype :service do
     attach host: :host_name
     setparameters :host_name, :hostgroup_name, :service_description,
-                  :display_name, :servicegroups, :is_volatile, :check_command,
-                  :initial_state, :max_check_attempts, :check_interval, :retry_interval,
-                  :normal_check_interval, :retry_check_interval, :active_checks_enabled,
-                  :passive_checks_enabled, :parallelize_check, :check_period,
-                  :obsess_over_service, :check_freshness, :freshness_threshold,
+                  :display_name, :parents, :importance, :servicegroups, :is_volatile,
+                  :check_command, :initial_state, :max_check_attempts, :check_interval,
+                  :retry_interval, :normal_check_interval, :retry_check_interval,
+                  :active_checks_enabled, :passive_checks_enabled, :parallelize_check,
+                  :check_period, :obsess_over_service, :check_freshness, :freshness_threshold,
                   :event_handler, :event_handler_enabled, :low_flap_threshold,
                   :high_flap_threshold, :flap_detection_enabled, :flap_detection_options,
                   :process_perf_data, :failure_prediction_enabled, :retain_status_information,
@@ -371,7 +371,7 @@ class Nagios::Base
   end
 
   newtype :contact do
-    setparameters :contact_name, :alias, :contactgroups,
+    setparameters :contact_name, :alias, :contactgroups, :minimum_importance,
                   :host_notifications_enabled, :service_notifications_enabled,
                   :host_notification_period, :service_notification_period,
                   :host_notification_options, :service_notification_options,
